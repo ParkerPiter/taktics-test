@@ -1,0 +1,51 @@
+<div ng-controller="BatchesController as vm">
+    <div style="width: 80%; margin: 0 auto;">
+        <h1>Batches List</h1>
+        <div style="border: 1px solid #000;padding: 10px;margin-bottom: 20px;">
+            <label for="rank">Rank</label>
+            <input style="margin: 5px 0;padding: 5px;width: calc(50% - 10px);" type="number" id="rank" ng-model="vm.formData.rank" disabled>
+            <br><label for="description">Description</label>
+            <input style="margin: 5px 0;padding: 5px;width: calc(50% - 10px);" type="text" id="description" ng-model="vm.formData.description">
+            <br><label for="amount">Amount</label>
+            <input style="margin: 5px 0;padding: 5px;width: calc(50% - 10px);" type="number" id="amount" ng-model="vm.formData.amount">
+            <br><label for="materialCostImport">Material Cost Import</label>
+            <input style="margin: 5px 0;padding: 5px;width: calc(50% - 10px);" type="number" id="materialCostImport" ng-model="vm.formData.materialCostImport">
+            <br><label for="labourCostImport">Labour Cost Import</label>
+            <input style="margin: 5px 0;padding: 5px;width: calc(50% - 10px);" type="number" id="labourCostImport" ng-model="vm.formData.labourCostImport">
+            <br>
+            <button style="padding: 10px 20px;margin-top: 10px;" ng-click="vm.addBatch()">Add Batch</button>
+        </div>
+        <table style="width: 100%;border-collapse: collapse;border: 1px solid #000;">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Material Cost Import</th>
+                    <th>Labour Cost Import</th>
+                    <th>Unitary Cost Import</th>
+                    <th>Total Cost Import</th>
+                    <th>Unitary Sale Cost</th>
+                    <th>Total Sale Import</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="batch in vm.batches">
+                    <td>{{ batch.rank }}</td>
+                    <td>{{ batch.description }}</td>
+                    <td>{{ batch.amount }}</td>
+                    <td>{{ batch.materialCostImport }}</td>
+                    <td>{{ batch.labourCostImport }}</td>
+                    <td>{{ batch.unitaryCostImport }}</td>
+                    <td>{{ batch.totalCostImport }}</td>
+                    <td>{{ batch.unitarySaleCost }}</td>
+                    <td>{{ batch.totalSaleImport }}</td>
+                    <td>
+                        <button ng-click="vm.deleteBatch(batch)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

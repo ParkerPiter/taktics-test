@@ -1,0 +1,53 @@
+<div ng-controller="ChaptersController as vm">
+    <div style="width: 80%; margin: 50px auto;">
+        <img ng-src="{{vm.budgetChapter.thumbnail}}" ng-if="vm.budgetChapter.thumbnail" width="100" alt="Miniatura" style="margin-top: 5px;">
+        <label>Cliente:</label>
+        <input type="text" ng-model="vm.budgetChapter.name" ng-change="checkClientEnter($event)" placeholder="Filtrar por nombre" style="margin: 5px 0;padding: 5px;width: calc(50% - 10px);">
+        <br><label>Total Cost:</label>
+        <input type="number" ng-model="vm.budgetChapter.clientName" placeholder="Filtrar por cliente" style="margin: 5px 0;padding: 5px;width: calc(50% - 10px);">
+        <br><label>Nombre:</label>
+        <input type="text" ng-model="vm.budgetChapter.clientName" placeholder="Filtrar por cliente" style="margin: 5px 0;padding: 5px;width: calc(50% - 10px);">
+        <br><label>Fechas:</label>
+        <input type="date" ng-model="vm.budgetChapter.startDate" placeholder="Desde">
+        <br><label>Total Sale:</label>
+        <input type="number" ng-model="vm.budgetChapter.clientName" placeholder="Filtrar por cliente" style="margin: 5px 0;padding: 5px;width: calc(50% - 10px);">
+    </div>
+    <div style="width: 80%; margin: 0 auto;">
+        <h1>Chapters List</h1>
+        <button ng-click="vm.addChapter(budgetIndex)">Add Chapter</button>
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid #ddd; padding: 8px;">Rank</th>
+                    <th style="border: 1px solid #ddd; padding: 8px;">Description</th>
+                    <th style="border: 1px solid #ddd; padding: 8px;">Labour Coefficient</th>
+                    <th style="border: 1px solid #ddd; padding: 8px;">Material Coefficient</th>
+                    <th style="border: 1px solid #ddd; padding: 8px;">Quantity</th>
+                    <th style="border: 1px solid #ddd; padding: 8px;">Labour Cost</th>
+                    <th style="border: 1px solid #ddd; padding: 8px;">Material Cost</th>
+                    <th style="border: 1px solid #ddd; padding: 8px;">Unit Sale</th>
+                    <th style="border: 1px solid #ddd; padding: 8px;">Total Cost</th>
+                    <th style="border: 1px solid #ddd; padding: 8px;">Total Sale</th>
+                    <th style="border: 1px solid #ddd; padding: 8px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="chapter in SharedService.getBudgets()[budgetIndex].chapters">
+                    <td style="border: 1px solid #ddd; padding: 8px;">{{ chapter.rank }}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">{{ chapter.description }}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">{{ chapter.labourCoefficient }}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">{{ chapter.materialCoefficient }}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">{{ chapter.quantity }}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">{{ chapter.labourCost }}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">{{ chapter.materialCost }}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">{{ chapter.unitSale }}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">{{ chapter.totalCost }}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">{{ chapter.totalSale }}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">
+                        <button ng-click="vm.deleteChapter(budgetIndex, chapter)" style="margin-right: 5px;">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

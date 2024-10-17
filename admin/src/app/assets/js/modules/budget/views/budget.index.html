@@ -1,0 +1,68 @@
+<div ng-controller="BudgetController as vm">
+  <div style="width: 80%; margin: 0 auto;">
+      <label>Nombre:</label>
+      <input type="text" ng-model="vm.filters.name" placeholder="Filtrar por nombre" style="margin: 5px 0;padding: 5px;width: calc(50% - 10px);">
+      <br><label>Cliente:</label>
+      <input type="text" ng-model="vm.filters.clientName" placeholder="Filtrar por cliente" style="margin: 5px 0;padding: 5px;width: calc(50% - 10px);">
+      <br><label>Rango de fechas:</label>
+      <input type="date" ng-model="vm.filters.startDate" placeholder="Desde">
+      <input type="date" ng-model="vm.filters.endDate" placeholder="Hasta">
+  </div>
+  <div style="display: flex; justify-content: end; margin: 25px 50px;">
+    <button type="button" ng-click="vm.createBudget()" style="padding: 10px 20px;">Crear Presupuesto</button>
+  </div>
+
+  <table style="width: 80%; border-collapse: collapse; margin: 0 auto;" >
+      <thead>
+          <tr>
+              <th style="border: 1px solid #ddd; padding: 8px;">Nombre</th>
+              <th style="border: 1px solid #ddd; padding: 8px;">Miniatura</th>
+              <th style="border: 1px solid #ddd; padding: 8px;">Fecha</th>
+              <th style="border: 1px solid #ddd; padding: 8px;">Cliente</th>
+              <th style="border: 1px solid #ddd; padding: 8px;">Costo Total</th>
+              <th style="border: 1px solid #ddd; padding: 8px;">Venta Total</th>
+              <th style="border: 1px solid #ddd; padding: 8px;">Acciones</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr ng-repeat="budget in vm.filteredBudgets">
+              <td style="border: 1px solid #000;padding: 10px;text-align: left;">{{budget.name}}</td>
+              <td style="border: 1px solid #000;padding: 10px;text-align: left;"><img ng-src="{{budget.thumbnail}}" width="50" alt="Miniatura"></td>
+              <td style="border: 1px solid #000;padding: 10px;text-align: left;">{{budget.date | date:'dd/MM/yyyy'}}</td>
+              <td style="border: 1px solid #000;padding: 10px;text-align: left;">{{budget.clientName}}</td>
+              <td style="border: 1px solid #000;padding: 10px;text-align: left;">{{budget.totalCostImport}}</td>
+              <td style="border: 1px solid #000;padding: 10px;text-align: left;">{{budget.totalSaleImport}}</td>
+              <td style="border: 1px solid #000;padding: 10px;text-align: left;">
+                  <button type="button" ng-click="vm.editBudget(budget)" style="margin-right: 5px;">Editar</button>
+                  <button type="button" ng-click="vm.deleteBudget(budget)">Eliminar</button>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+  <div ng-if="vm.editMode" style="margin-top: 15px;">
+      <h3>{{ vm.selectedBudget.id ? 'Editar' : 'Crear' }} Presupuesto</h3>
+      <form>
+          <div style="margin-bottom: 15px;">
+              <label>Nombre:</label>
+              <input type="text" ng-model="vm.selectedBudget.name" placeholder="Nombre del presupuesto" required style="margin-left: 5px;">
+          </div>
+          <div style="margin-bottom: 15px;">
+              <label>Miniatura:</label>
+              <input type="file" ng-change="vm.handleFileSelect($event)" ng-model="vm.formData.thumbnail" accept="image/*" style="margin-left: 5px;">
+              <img ng-src="{{vm.selectedBudget.thumbnail}}" ng-if="vm.selectedBudget.thumbnail" width="100" alt="Miniatura" style="margin-top: 5px;">
+          </div>
+          <div style="margin-bottom: 15px;">
+              <label>Cliente:</label>
+              <input type="text" ng-model="vm.selectedBudget.clientName" placeholder="Nombre del cliente" required style="margin-left: 5px;">
+          </div>
+          <div style="margin-bottom: 15px;">
+              <label>Fecha:</label>
+              <input type="date" ng-model="vm.selectedBudget.date" required style="margin-left: 5px;">
+          </div>
+          <div style="margin-top: 15px;">
+            <button type="button" ng-click="vm.saveBudget()" style="padding: 10px 20px; margin-right: 10px;">Save</button>
+            <button type="button" ng-click="vm.resetForm()" style="padding: 10px 20px;">Cancel</button>
+          </div>
+      </form>
+  </div>
+</div>
